@@ -3,12 +3,14 @@
 #include <string>
 using std::string;
 
-class pawn
+#include "worldEntity.h"
+
+class pawn : public worldEntity
 {
 public:
-    pawn(string name);
+    pawn(string name, uint32_t x, uint32_t y, world& entitiesWorld);
 
-    const string& getName();
+    const string& getName() const;
 
 private:
     string mName;

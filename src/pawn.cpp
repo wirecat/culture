@@ -1,15 +1,12 @@
 #include "pawn.h"
 
-#include <iostream>
-using std::cout;
-using std::endl;
-
-pawn::pawn(string name)
+pawn::pawn(string name, uint32_t x, uint32_t y, world& entitiesWorld)
+    : worldEntity(x, y, entitiesWorld)
 {
     mName = name;
 }
 
-const string& pawn::getName()
+const string& pawn::getName() const
 {
     return mName;
 }
