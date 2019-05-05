@@ -1,23 +1,28 @@
 #pragma once
 
-#include "defs.h"
-#include "world.h"
+#include <string>
+using std::string;
 
+#include "defs.h"
+
+/*
+World entities exist within a world and all have a name.
+*/
 class worldEntity
 {
 public:
-    worldEntity(uint32_t x, uint32_t y, world& entitiesWorld);
+    /*
+    Creates and returns a worldEntity.
 
-    uint32_t getX() const;
-    void setX(uint32_t x);
+    name - Name of the worldEntity.
+    */
+    worldEntity(string name);
 
-    uint32_t getY() const;
-    void setY(uint32_t y);
-
-    world& getEntitiesWorld() const;
+    /*
+    Returns the name of the worldEntity.
+    */
+    const string& getName() const;
 
 private:
-    uint32_t mX;
-    uint32_t mY;
-    world& mWorld;
+    string mName;
 };

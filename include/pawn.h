@@ -5,13 +5,18 @@ using std::string;
 
 #include "worldEntity.h"
 
+/*
+Pawns are animated entities that live within a world. They have artificial
+intelligence, attributes, and can attempt to act upon other pawns within
+the world.
+*/
 class pawn : public worldEntity
 {
 public:
-    pawn(string name, uint32_t x, uint32_t y, world& entitiesWorld);
-
-    const string& getName() const;
+    /*
+    Creates and returns a pawn.
+    */
+    pawn(string name);
 
 private:
-    string mName;
 };
