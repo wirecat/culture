@@ -9,52 +9,66 @@ using std::string;
 #include <vector>
 using std::vector;
 
+#include "pawn.h"
+
 #include "defs.h"
-#include "worldEntity.h"
 
 /*
-Represents the game world and manages the entities that live within said world.
+ Represents the game world and manages the entities that live within said world.
 */
 class world
 {
 public:
-    /*
+   /*
     Creates and returns a world.
-
-    width - Width of the world.
+   
+    width - Width "of the" world.
     height - Height of the world.
     name - Name of the world.
-    */
-    world(int width, int height, string name);
+   */
+   world(int width, int height, string name);
 
-    /* 
-    Emplaces an entity at the given position if possible.
+   /*
+    Spawns a pawn at the given position if possible.
 
-    entity - Entity to emplace.
-    x - The horizontal component.
-    y - The vertical component.
-    */
-    void emplaceEntity(shared_ptr<worldEntity>& entity, int x, int y);
+    pawn - Pawn to spawn.
+    x - Proposed position of pawn on x axis.
+    y - Proposed position of pawn on y axis.
+   */
 
-    /*
+   /* 
+    Spawns a pawn at the given position if possible.
+
+    pawn - Pawn to spawn.
+    x - Proposed position of pawn on x axis.
+    y - Proposed position of pawn on y axis.
+   */
+   bool resolveSpawn(const shared_ptr<pawn>& pawn, uint32_t x, uint32_t y);
+
+   /*
     Returns the width of the world.
-    */
-    uint32_t getWidth() const;
+   */
+   uint32_t getWidth() const;
 
-    /*
+   /*
     Returns the height of the world.
-    */
-    uint32_t getHeight() const;
+   */
+   uint32_t getHeight() const;
 
-    /*
+   /*
     Returns the name of the world.
-    */
-    string getName() const;
+   */
+   string getName() const;
+
+   /*
+    Returns pawn at location if possible
+   */
+   shared_ptr<pawn>& getPawn(uint32_t x, uint32_t y);
 
 private:
-    uint32_t mWidth;
-    uint32_t mHeight;
-    string mName;
-    vector<vector<shared_ptr<worldEntity>>> mWorld;
-    vector<shared_ptr<worldEntity>> mOccupants;
+   uint32_t width_;
+   uint32_t height_;
+   string name_;
+   vector<vector<shared_ptr<pawn>>> world_;
+   vector<shared_ptr<pawn>> occupants_;
 };

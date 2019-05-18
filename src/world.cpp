@@ -1,33 +1,42 @@
 #include "world.h"
 
 world::world(int width, int height, string name)
-    : mWidth(width),
-      mHeight(height),
-      mName(name),
-      mWorld(width, vector<shared_ptr<worldEntity>>(height, nullptr)),
-      mOccupants()
+   : width_(width),
+     height_(height),
+     name_(name),
+     world_(width, vector<shared_ptr<pawn>>(height))
 { }
 
-void world::emplaceEntity(shared_ptr<worldEntity>& entity, int x, int y)
+bool world::resolveSpawn(const shared_ptr<pawn>& pawn, uint32_t x, uint32_t y)
 {
-    // TODO Verify these inputs before adding. Maybe return an enum to indicate
-    // failure conditions?
+   // Must spawn within the boundaries
+   if(x >= width_ && y >= height_)
+      return false;
 
-    mOccupants.push_back(entity);
-    mWorld[x][y] = entity;
+   // Can't spawn ontop of another pawn
+   if(world_[x][y])
+      return false;
+
+   // Spawn
+   world_[x][y] = pawn;
+   return true;
 }
 
 uint32_t world::getWidth() const
 {
-    return mWidth;
+   return width_;
 }
 
 uint32_t world::getHeight() const
 {
-    return mHeight;
+   return height_;
 }
 
 string world::getName() const
 {
-    return mName;
+   return name_;
+}
+shared_ptr<pawn>& world::getPawn(uint32_t x, uint32_t y)
+{
+   return world_[x][y];
 }

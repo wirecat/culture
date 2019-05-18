@@ -9,11 +9,11 @@
             "command": "make debug",
             "presentation": {
                 "echo": true,
-                "reveal": "silent",
+                "reveal": "always",
                 "focus": false,
-                "panel": "shared",
+                "panel": "dedicated",
                 "showReuseMessage": false,
-                "clear": false
+                "clear": true
             },
             "group": {
                 "kind": "build",

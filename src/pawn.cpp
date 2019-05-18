@@ -1,6 +1,10 @@
 #include "pawn.h"
 
 pawn::pawn(string name)
-    : worldEntity(name)
+   : name_(name)
+{ }
+
+string pawn::getName()
 {
+   return name_;
 }
