@@ -3,8 +3,8 @@
 #include <memory>
 using std::shared_ptr;
 
-#include <vector>
-using std::vector;
+#include <map>
+using std::map;
 
 #include "pawn.h"
 
@@ -21,6 +21,29 @@ public:
    */
    cell();
 
+   /*
+   Returns the occupants of the cell.
+   */
+   virtual const map<uint32_t, shared_ptr<pawn>>&
+   getOccupants();
+
+   /*
+   If possible, lets the newby join the cell. Returns
+   false if not possible.
+   
+   newby - The pawn attempting to join this cell.
+   */
+   virtual bool
+   resolveJoin(shared_ptr<pawn> newby);
+
+   /*
+   Removes the pawn from the cell.
+   
+   newby - The pawn leaving this cell.
+   */
+   virtual void
+   leave(shared_ptr<pawn> quiter);
+
 private:
-   vector<pawn> occupants_;
+   map<uint32_t, shared_ptr<pawn>> occupants_;
 };

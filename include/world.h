@@ -28,14 +28,6 @@ public:
    */
    world(int width, int height, string name);
 
-   /*
-    Spawns a pawn at the given position if possible.
-
-    pawn - Pawn to spawn.
-    x - Proposed position of pawn on x axis.
-    y - Proposed position of pawn on y axis.
-   */
-
    /* 
     Spawns a pawn at the given position if possible.
 
