@@ -10,7 +10,7 @@ using std::string;
 using std::vector;
 
 #include "pawn.h"
-
+#include "cell.h"
 #include "defs.h"
 
 /*
@@ -53,14 +53,13 @@ public:
    string getName() const;
 
    /*
-    Returns pawn at location if possible
+    Returns cell at location if possible
    */
-   shared_ptr<pawn>& getPawn(uint32_t x, uint32_t y);
+   shared_ptr<cell>& getCell(uint32_t x, uint32_t y);
 
 private:
    uint32_t width_;
    uint32_t height_;
    string name_;
-   vector<vector<shared_ptr<pawn>>> world_;
-   vector<shared_ptr<pawn>> occupants_;
+   vector<vector<shared_ptr<cell>>> world_;
 };

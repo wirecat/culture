@@ -4,8 +4,14 @@ world::world(int width, int height, string name)
    : width_(width),
      height_(height),
      name_(name),
-     world_(width, vector<shared_ptr<pawn>>(height))
-{ }
+     world_(width, vector<shared_ptr<cell>>(height))
+{
+   for(int i = 0; i < width; i++)
+   for(int j = 0; j < height; j++)
+   {
+      world_[i][j] = std::make_shared<cell>();
+   }
+}
 
 bool world::resolveSpawn(const shared_ptr<pawn>& pawn, uint32_t x, uint32_t y)
 {
@@ -13,13 +19,8 @@ bool world::resolveSpawn(const shared_ptr<pawn>& pawn, uint32_t x, uint32_t y)
    if(x >= width_ && y >= height_)
       return false;
 
-   // Can't spawn ontop of another pawn
-   if(world_[x][y])
-      return false;
-
-   // Spawn
-   world_[x][y] = pawn;
-   return true;
+   // Spawn if cell allows it
+   return world_[x][y]->resolveJoin(pawn);
 }
 
 uint32_t world::getWidth() const
@@ -36,7 +37,8 @@ string world::getName() const
 {
    return name_;
 }
-shared_ptr<pawn>& world::getPawn(uint32_t x, uint32_t y)
+
+shared_ptr<cell>& world::getCell(uint32_t x, uint32_t y)
 {
    return world_[x][y];
 }

@@ -4,6 +4,7 @@ using std::endl;
 
 #include "pawn.h"
 #include "world.h"
+#include "cell.h"
 
 int main()
 {
@@ -19,20 +20,31 @@ int main()
         << test_world.getName()
         << endl;
 
-   cout << "Pawns:" << endl;
+   cout << "Cells & Occupants:" << endl;
    for(int i = 0; i < test_world.getWidth(); i++)
-     for(int j = 0; j < test_world.getHeight(); j++)
-     {
-          auto found_pawn = test_world.getPawn(i, j);
-          if(found_pawn)
-          {
-               cout << i
-                    << ','
-                    << j
-                    << ": "
-                    << found_pawn->getName()
+      for(int j = 0; j < test_world.getHeight(); j++)
+      {
+         auto found_cell = test_world.getCell(i, j);
+         auto occupants = found_cell->getOccupants();
+
+         if(occupants.size() > 0)
+         {
+            cout << "  "
+                 << i
+                 << ','
+                 << j
+                 << ":"
+                 << endl;
+
+            for(auto occupant : occupants)
+            {
+               cout << "    "
+                    << occupant.first
+                    << ", "
+                    << occupant.second->getName()
                     << endl;
-          }
-     }
+            }
+         }
+      }
    return 0;
 }

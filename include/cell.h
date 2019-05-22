@@ -28,6 +28,14 @@ public:
    getOccupants();
 
    /*
+   If joining is possible, returns true.
+
+   newby - The potential new spawn.
+   */
+   virtual bool
+   checkJoin(shared_ptr<pawn> newby);
+
+   /*
    If possible, lets the newby join the cell. Returns
    false if not possible.
    

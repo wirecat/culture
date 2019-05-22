@@ -9,12 +9,23 @@ cell::getOccupants()
    return occupants_;
 }
 
+bool cell::checkJoin(shared_ptr<pawn> newby)
+{
+   return true;
+}
+
 bool cell::resolveJoin(shared_ptr<pawn> newby)
 {
-   occupants_[newby->getId()] = newby;
+   bool retVal = false;
+
+   if(checkJoin(newby))
+   {
+      occupants_[newby->getId()] = newby;
+      retVal = true;
+   }
    
    // Base cell always allows joins.
-   return true;
+   return retVal;
 }
 
 void cell::leave(shared_ptr<pawn> quiter)
